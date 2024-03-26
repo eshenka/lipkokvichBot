@@ -30,7 +30,7 @@ async def red_rabbit(callback: CallbackQuery):
 
 @router.callback_query(F.data == 'red-rabbit-menu')
 async def red_rabbit_menu(callback: CallbackQuery):
-    await callback.message.edit_caption(text='Выберите позицию', reply_markup=await keyboards.inline_red_rabbit_menu())
+    await callback.message.edit_caption(text='Выберите позицию', reply_markup=keyboards.inline_red_rabbit_menu())
 
 
 @router.callback_query(F.data.in_(keyboards.red_rabbit_menu_positions.keys()))

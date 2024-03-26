@@ -6,9 +6,10 @@ food_courts = InlineKeyboardMarkup(inline_keyboard=[
      InlineKeyboardButton(text='Хан Буз♨️', callback_data='khan-buz')]
 ])
 
-
 red_rabbit = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='RedRabbit🐇', url='https://redrabbit-academ.ru/')], [InlineKeyboardButton(text='Меню', callback_data='red-rabbit-menu')]])
+    [InlineKeyboardButton(text='RedRabbit🐇', url='https://redrabbit-academ.ru/')],
+    [InlineKeyboardButton(text='Меню', callback_data='red-rabbit-menu')]])
+
 khan_buz = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Хан Буз♨️', url='https://khan-buz.ru/')]])
 
@@ -20,7 +21,7 @@ red_rabbit_menu_positions = {
 }
 
 
-async def inline_red_rabbit_menu():
+def inline_red_rabbit_menu():
     red_rabbit_menu_keyboard = InlineKeyboardBuilder()
 
     for position in red_rabbit_menu_positions.keys():
