@@ -53,8 +53,7 @@ async def game_number(message: Message):
 @router.message(F.content_type.in_({'sticker'}))
 async def send_sticker(message: Message):
     sticker_pack = keyboards.stickers
-    pack_len = len(sticker_pack)
-    await message.answer_sticker(sticker=sticker_pack[random.randint(0, pack_len - 1)])
+    await message.answer_sticker(sticker=random.choice(sticker_pack))
 
 
 @router.message(F.text == 'как дела?')
@@ -82,6 +81,8 @@ async def red_rabbit_positions(callback: CallbackQuery):
     else:
         raise Exception("invalid callback data")
 
+    await callback.answer()
+
 
 @router.callback_query(F.data.in_({'khan-buz', 'kh-menu-back'}))
 async def khan_buz(callback: CallbackQuery):
@@ -103,13 +104,17 @@ async def khan_buz_positions(callback: CallbackQuery):
     else:
         raise Exception("invalid callback data")
 
+    await callback.answer()
+
 
 @router.callback_query(F.data == 'rr-random')
 async def red_rabbit_random(callback: CallbackQuery):
     await callback.message.answer(keyboards.process_random(keyboards.red_rabbit_menu_positions))
+    await callback.answer()
 
 
 @router.callback_query(F.data == 'kh-random')
 async def khan_buz_random(callback: CallbackQuery):
     await callback.message.answer(keyboards.process_random(keyboards.khan_buz_menu_positions))
+    await callback.answer()
 
