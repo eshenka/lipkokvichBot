@@ -91,12 +91,7 @@ def inline_khan_buz_menu():
 
 
 def process_food_data(category):
-    answer_text = ''
-
-    for food in category:
-        answer_text += food.name + ' ' + str(food.price) + 'р.\n'
-
-    return answer_text
+    return "\n".join(f"{food.name} {food.price} р." for food in category)
 
 
 def process_random(dishes):
@@ -105,7 +100,7 @@ def process_random(dishes):
 
     for i in range(0, 3):
         name, category = random.choice(list(dishes.items()))
-        dish = category[random.randint(0, len(category) - 1)]
+        dish = random.choice(category)
         idea += name[2:] + ' ' + dish.name + '\n'
         cost += dish.price
 
