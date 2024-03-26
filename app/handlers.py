@@ -9,6 +9,12 @@ import random
 router = Router()
 
 
+class Food:
+    def __init__(self, name: str, price: int):
+        self.name = name
+        self.price = price
+
+
 @router.message(CommandStart())
 async def command_start(message: Message):
     await message.answer(text='Где хотите покушать сегодня?', reply_markup=keyboards.food_courts)
@@ -100,11 +106,10 @@ async def khan_buz_positions(callback: CallbackQuery):
 
 @router.callback_query(F.data == 'rr-random')
 async def red_rabbit_random(callback: CallbackQuery):
-    idea = keyboards.red_rabbit_random_variants[random.randint(0, len(keyboards.red_rabbit_random_variants) - 1)]
-    await callback.message.answer(idea)
+    await callback.message.answer(keyboards.process_random(keyboards.red_rabbit_menu_positions))
 
 
 @router.callback_query(F.data == 'kh-random')
-async def red_rabbit_random(callback: CallbackQuery):
-    idea = keyboards.khan_buz_random_variants[random.randint(0, len(keyboards.khan_buz_random_variants) - 1)]
-    await callback.message.answer(idea)
+async def khan_buz_random(callback: CallbackQuery):
+    await callback.message.answer(keyboards.process_random(keyboards.khan_buz_menu_positions))
+
